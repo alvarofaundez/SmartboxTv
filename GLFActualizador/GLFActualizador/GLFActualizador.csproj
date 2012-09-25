@@ -46,6 +46,16 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ConnectionLayer\ConnectionLayer.csproj">
+      <Project>{3C74D299-D511-4D64-952A-2CA8E174E71F}</Project>
+      <Name>ConnectionLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DTOLayer\DTOLayer.csproj">
+      <Project>{6D4AB28A-AC67-47C9-A98E-C131E19F5A04}</Project>
+      <Name>DTOLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
