@@ -14,8 +14,6 @@ namespace GLFActualizador
 {
     class Program
     {
-
-
         static GLFDatabaseConnection conexion = new GLFDatabaseConnection();
         static void Main(string[] args)
         {
