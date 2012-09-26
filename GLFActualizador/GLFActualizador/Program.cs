@@ -33,6 +33,7 @@ namespace GLFActualizador
             InsertScheduleValues(doc);
             InsertScheduleFlags(doc);
             InsertSchedule(doc);
+
         }
 
         static String fileName()
