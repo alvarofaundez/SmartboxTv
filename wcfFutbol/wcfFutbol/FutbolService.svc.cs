@@ -274,6 +274,11 @@ namespace wcfFutbol
 
             JsonObjectCollection jsonFinal = new JsonObjectCollection();
 
+            JsonStringValue imgShield = new JsonStringValue("escudo", "http://190.215.44.18/FutbolService/Img/" + flag(idTeam).Replace("Bandera","Shield"));
+            JsonStringValue imgField = new JsonStringValue("campo", "http://190.215.44.18/FutbolService/Img/" + flag(idTeam).Replace("Bandera", "Field"));
+            JsonStringValue imgInfo = new JsonStringValue("info", "http://190.215.44.18/FutbolService/Img/" + flag(idTeam).Replace("Bandera", "Info"));
+            JsonStringValue imgShirt = new JsonStringValue("camiseta", "http://190.215.44.18/FutbolService/Img/" + flag(idTeam).Replace("Bandera", "Tshirt"));
+
             JsonObjectCollection goalKeeper = new JsonObjectCollection("arquero");
             JsonObjectCollection defense = new JsonObjectCollection("defensas");
             JsonObjectCollection midfielder = new JsonObjectCollection("mediocampo");
@@ -375,6 +380,11 @@ namespace wcfFutbol
                 
                 i++;
             }
+
+            jsonFinal.Add(imgShield);
+            jsonFinal.Add(imgField);
+            jsonFinal.Add(imgInfo);
+            jsonFinal.Add(imgShirt);
             jsonFinal.Add(goalKeeper);
             jsonFinal.Add(defense);
             jsonFinal.Add(midfielder);
