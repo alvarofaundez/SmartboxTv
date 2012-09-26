@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Tabla de posiciones</title>
+<link rel="stylesheet" type="text/css" href="css/index.css">
+        <script type="text/javascript" src="js/zepto.js"></script>
+<script type="text/javascript">
+    function selectAction(dir){
+        var KeyID = event.keyCode;
+        if(KeyID==13)
+        {
+            window.location = dir;
+        }
+    }
+
+    function Posiciones()
+    {
+      this.pdata;
+      this.setData = function(data){
+        this.pdata = JSON.parse(data.JSONPosicionesResult);
+        console.log(this.pdata);
+      }
+      this.getData = function(){
+        return this.pdata;
+      }
+      this.setUIData = function(){
+        $.each(this.getData(), function(k,v){
+            //$('.scroll').append
+            $('.box-contenedor').append('<button class="box-equipo" id="'+k+'">\
+                <div class="bandera">\
+                    <img src="'+v.img+'" />\
+                    <div class="nombre">'+v.name+'</div>\
+                </div>\
+                <div class="numero-ptj-a" id="pts">'+v.pts+'</div>\
+                <div class="numero-ptj-b" id="pj">'+v.pj+'</div>\
+                <div class="numero-ptj-a" id="pg">'+v.pg+'</div>\
+                <div class="numero-ptj-b" id="pe">'+v.pe+'</div>\
+                <div class="numero-ptj-a" id="pp">'+v.pp+'</div>\
+                <div class="numero-ptj-b" id="gd">'+v.gd+'</div>\
+                <div class="id">'+v.id+'</div>\
+                </button>');
+        });
+        $('.box-contenedor').append('<div class="clear"></div>\
+            <div class="clear"></div>\
+            <button class="btn-cerrar">Cerrar</button>\
+            <button class="btn-volver">Volver</button>');
+        $('.box-equipo').on('focus', function(){
+            $('.box-equipo').on('keydown', function(e){
+                //selectAction('http://190.215.44.18/FutbolService/FutbolService.svc/resultado2json/'+tournamentId+','+$('#'+$(this).attr('id')+' .id').text());
+                selectAction('resultados.html?tournamentId='+tournamentId+'&teamId='+$('#'+$(this).attr('id')+' .id').text());
+            });
+        });
+
+        $('.btn-volver').on('focus', function(){
+          $('.btn-volver').on('keydown', function(e){
+            selectAction('index.html');
+          });
+      });
+    }
+    }
+    $(document).ready(function(){
+
+        // Begin receiving parameters
+        var queryString = window.location.search || '';
+        var keyValPairs = [];
+        var params      = {};
+        queryString     = queryString.substr(1);
+
+        if (queryString.length)
+        {
+           keyValPairs = queryString.split('&');
+           for (pairNum in keyValPairs)
+           {
+              var key = keyValPairs[pairNum].split('=')[0];
+              if (!key.length) continue;
+              if (typeof params[key] === 'undefined')
+                 params[key] = [];
+              params[key].push(keyValPairs[pairNum].split('=')[1]);
+           }
+        }
+        tournamentId = params['tournamentId'];
+        // End doing this shit
+
+        $(".back").animate({ opacity: 0 }, 0 , 'ease-out');
+        $(".next").animate({ opacity: 0 }, 0, 'ease-out');
+        var p = new Posiciones();
+        $.ajax({
+          type: 'GET', 
+          url: "http://190.215.44.18/FutbolService/FutbolService.svc/posicionjson/"+tournamentId, 
+          dataType: "json", 
+          success: function(data){
+            //console.log(data.JSONPosicionesResult);
+            p.setData(data);
+            p.setUIData();
+          }
+        });
+    });
+
+        //});
+</script>
+</head>
+<body>
+<div class="box-contenedor">
+	<div class="logo-camp">
+    	<img src="images/logo-camp.png" border="0" width="350" height="95" />
+    </div>
+    <div class="back"><img src="images/btn-back.png" /></div>
+    <div class="box-nom-categoria">
+    	<div class="titulo-categoria">Tabla de posiciones</div>
+    </div>
+    <div class="next"><img src="images/btn-next.png" /></div>
+    
+    <div class="clear"></div>
+    
+    <div class="title-nombre-equipos">
+    	Equipos
+    </div>
+    <div class="title-ptj">PTS</div>
+    <div class="title-ptj">PJ</div>
+    <div class="title-ptj">PG</div>
+    <div class="title-ptj">PE</div>
+    <div class="title-ptj">PP</div>
+    <div class="title-ptj">GD</div>
+    
+    <div class="clear"></div>
+    
+</div>
+</body>
+</html>

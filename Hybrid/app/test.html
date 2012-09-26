@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Tusting pls</title>
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <script type="text/javascript" src="js/zepto.js"></script>
+        <script type="text/javascript">
+
+            $(document).ready(function(){
+                $.ajax({
+                  type: 'GET', 
+                  url: "http://192.168.1.169/FutbolService/FutbolService.svc/json/asd", 
+                  dataType: "jsonp", 
+                  success: function(data){
+                    //console.log(data.JSONDataResult);
+                    var asdf = JSON.parse(data.JSONDataResult);
+                    console.log(asdf);
+                  }
+                });
+                $(".titulo-categoria").trigger('focus');
+                $(".titulo-categoria").on('focus', function(e){
+                    $(".back").animate({ opacity: 0 }, 300 , 'ease-out');
+                    $(".next").animate({ opacity: 0 }, 300, 'ease-out');
+                    //document.onkeydown = KeyCheck;
+                    $(".titulo-categoria").on('keyup', function(e){
+                      alert(e);
+                        var KeyID = e.keyCode;
+                        switch(KeyID)
+                        {
+                            case 37:
+                            alert("Arrow Left "+KeyID);
+                            break;
+                            case 38:
+                            alert("Arrow Up "+KeyID);
+                            break;
+                            case 39:
+                            alert("Arrow Right "+KeyID);
+                            break;
+                            case 40:
+                            alert("Arrow Down "+KeyID);
+                            break;
+                        }
+                    });
+                    
+                });
+                $(".titulo-categoria").on('blur', function(e){
+                    $(".back").animate({ opacity: 1 }, 300 , 'ease-out');
+                    $(".next").animate({ opacity: 1 }, 300, 'ease-out');
+                });
+            });
+
+            function KeyCheck()
+            {
+                var KeyID = event.keyCode;
+   switch(KeyID)
+
+   {
+
+      case 16:
+
+      alert("Shift");
+
+      break; 
+
+      case 17:
+
+      alert("Ctrl");
+
+      break;
+
+      case 18:
+
+      alert("Alt");
+
+      break;
+
+      case 19:
+
+      alert("Pause");
+
+      break;
+
+      case 37:
+
+      alert("Arrow Left");
+
+      break;
+
+      case 38:
+
+      alert("Arrow Up");
+
+      break;
+
+      case 39:
+
+      alert("Arrow Right");
+
+      break;
+
+      case 40:
+
+      alert("Arrow Down");
+
+      break;
+   }
+
+}
+        </script>
+    </head>
+
+    <body>
+        <div class="box-contenedor">
+        	<div class="logo-camp">
+            	<img src="images/logo-camp.png" border="0" width="350" height="95" />
+            </div>
+            <div class="back"><img src="images/btn-back.png" /></div>
+            <div class="box-nom-categoria">
+            	<button class="titulo-categoria">Resumen</button>
+            </div>
+            <div class="next"><img src="images/btn-next.png" /></div>
+            
+            <div class="clear"></div>
+            
+            <div class="box-versus">
+            	<div id="home" class="equipo1">Chile</div>
+                <div id="visit" class="equipo2">Argentina</div>
+            </div>
+            
+            <div class="clear"></div>
+            
+            <div class="banderas-equipo"></div>
+            <div class="banderas-equipo"></div>
+            
+            <div class="clear"></div>
+            
+            <div class="box-estadisticas">
+            	<div id="Ghome" class="dato-numeroleft">1</div>
+                <div class="dato-estadistica">Goles</div>
+                <div id="Gvisit" class="dato-numeroright">8</div>
+            </div>
+            <div class="box-estadisticas">
+            	<div id="OShome" class="dato-numeroleft">1</div>
+                <div class="dato-estadistica">Fuera de lugar</div>
+                <div id="OSvisit" class="dato-numeroright">8</div>
+            </div>
+            <div class="box-estadisticas">
+            	<div id="OPhome" class="dato-numeroleft">1</div>
+                <div class="dato-estadistica">Llegadas</div>
+                <div id="OPvisit" class="dato-numeroright">8</div>
+            </div>
+            <div class="box-estadisticas">
+            	<div id="Chome" class="dato-numeroleft">1</div>
+                <div class="dato-estadistica">Tiros de esquina</div>
+                <div id="Cvisit" class="dato-numeroright">8</div>
+            </div>
+            <div class="box-estadisticas">
+            	<div id="Fhome" class="dato-numeroleft">1</div>
+                <div class="dato-estadistica">Faltas</div>
+                <div id="Fvisit" class="dato-numeroright">8</div>
+            </div>
+            <div class="box-estadisticas">
+            	<div id="Yhome" class="dato-numeroleft">1</div>
+                <div class="dato-estadistica">Tarjetas amarillas</div>
+                <div id="Yvisit" class="dato-numeroright">8</div>
+            </div>
+            <div class="box-estadisticas">
+            	<div id="Rhome" class="dato-numeroleft">1</div>
+                <div class="dato-estadistica">Tarjetas rojas</div>
+                <div id="Rvisit" class="dato-numeroright">8</div>
+            </div>
+            
+            <button class="btn-cerrar">Cerrar</button>
+            <button class="btn-volver">Volver</button>
+
+        </div>
+    </body>
+</html>

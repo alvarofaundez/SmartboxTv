@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Ultimo partido</title>
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <script type="text/javascript" src="js/zepto.js"></script>
+        <script type="text/javascript">
+          function selectAction(dir){
+            var KeyID = event.keyCode;
+            if(KeyID==13)
+            {
+              window.location = dir;
+            }
+          }
+        function UltimoPartido()
+        {
+          this.pdata;
+          this.categories = new Array();
+          this.catIndex=0;
+          this.setData = function(data){
+            this.pdata = JSON.parse(data.JSONEnVivoResult);
+          }
+          this.getData = function(){
+            return this.pdata;
+          }
+          this.currentCategory = function(){
+            return this.categories[this.catIndex];
+          }
+          this.setUIData = function(){
+            this.categories.push("Ultimo Partido");
+            this.categories.push(this.getData().Home.name);
+            this.categories.push(this.getData().Visit.name);
+            $("#title").text(this.currentCategory());
+            $('#home').text(this.getData().Home.name);
+            $('#visit').text(this.getData().Visit.name);
+            $('#Ghome').text(this.getData().Home.goal);
+            $('#Gvisit').text(this.getData().Visit.goal);
+            $('#OShome').text(this.getData().Home.offside);
+            $('#OSvisit').text(this.getData().Visit.offside);
+            $('#OPhome').text(this.getData().Home.arrival);
+            $('#OPvisit').text(this.getData().Visit.arrival);
+            $('#Chome').text(this.getData().Home.corner);
+            $('#Cvisit').text(this.getData().Visit.corner);
+            $('#Fhome').text(this.getData().Home.foul);
+            $('#Fvisit').text(this.getData().Visit.foul);
+            $('#Yhome').text(this.getData().Home.yellow);
+            $('#Yvisit').text(this.getData().Visit.yellow);
+            $('#Rhome').text(this.getData().Home.red);
+            $('#Rvisit').text(this.getData().Visit.red);
+            $('#flagHome').attr("src", this.getData().Home.img);
+            $('#flagVisit').attr("src", this.getData().Visit.img);
+          }
+          this.refreshArrows = function(){
+            if(this.catIndex==0)
+            {
+              $(".back").animate({ opacity: 0 }, 300 , 'ease-out');
+              $(".next").animate({ opacity: 1 }, 300, 'ease-out');
+            }
+            if((this.catIndex>0)&&(this.catIndex<this.categories.length))
+            {
+              $(".back").animate({ opacity: 1 }, 300 , 'ease-out');
+              $(".next").animate({ opacity: 1 }, 300, 'ease-out');
+            }
+            if(this.catIndex==this.categories.length)
+            {
+              $(".back").animate({ opacity: 1 }, 300 , 'ease-out');
+              $(".next").animate({ opacity: 0 }, 300, 'ease-out');
+            }
+          }
+          this.changeCategory = function(){
+            var KeyID = event.keyCode;
+            switch(KeyID)
+            {
+                case 37:
+                if(this.catIndex>0)
+                  this.catIndex--;
+                break;
+                case 39:
+                if(this.catIndex<this.categories.length-1)
+                  this.catIndex++;
+                break;
+            }
+            $("#title").text(this.categories[this.catIndex]);
+            if(this.catIndex==0)
+            {
+              $(".lastMatch").animate({ opacity: 1 }, 1500 , 'ease-out');
+              $(".homePanel").animate({ opacity: 0 }, 1500 , 'ease-out');
+              $(".lastMatch").css('display', 'block');
+              $(".homePanel").css('display', 'none');
+              $(".back").animate({ opacity: 0 }, 300 , 'ease-out');
+              $(".next").animate({ opacity: 1 }, 300, 'ease-out');
+            }
+            if((this.catIndex>0)&&(this.catIndex<this.categories.length-1))
+            {
+              $(".lastMatch").animate({ opacity: 0 }, 1500 , 'ease-out');
+              $(".visitPanel").animate({ opacity: 0 }, 1500 , 'ease-out');
+              $(".homePanel").animate({ opacity: 1 }, 1500 , 'ease-out');
+              $(".lastMatch").css('display', 'none');
+              $(".visitPanel").css('display', 'none');
+              $(".homePanel").css('display', 'block');
+              $(".back").animate({ opacity: 1 }, 300 , 'ease-out');
+              $(".next").animate({ opacity: 1 }, 300, 'ease-out');
+            }
+            if(this.catIndex==this.categories.length-1)
+            {
+              $(".homePanel").animate({ opacity: 0 }, 1500 , 'ease-out');
+              $(".visitPanel").animate({ opacity: 1 }, 1500 , 'ease-out');
+              $(".homePanel").css('display', 'none');
+              $(".visitPanel").css('display', 'block');
+              $(".back").animate({ opacity: 1 }, 300 , 'ease-out');
+              $(".next").animate({ opacity: 0 }, 300, 'ease-out');
+            }
+            console.log(this.catIndex);
+          }
+        }
+
+            $(document).ready(function(){
+
+                // Begin receiving parameters
+                var queryString = window.location.search || '';
+                var keyValPairs = [];
+                var params      = {};
+                queryString     = queryString.substr(1);
+
+                if (queryString.length)
+                {
+                   keyValPairs = queryString.split('&');
+                   for (pairNum in keyValPairs)
+                   {
+                      var key = keyValPairs[pairNum].split('=')[0];
+                      if (!key.length) continue;
+                      if (typeof params[key] === 'undefined')
+                         params[key] = [];
+                      params[key].push(keyValPairs[pairNum].split('=')[1]);
+                   }
+                }
+                tournamentId = params['tournamentId'];
+                console.log('tournamentId = '+tournamentId);
+                // End doing this shit
+
+                $(".homePanel").css('display', 'none');
+                $(".visitPanel").css('display', 'none');
+                var r = new UltimoPartido();
+                $(".back").animate({ opacity: 0 }, 300 , 'ease-out');
+                $(".next").animate({ opacity: 0 }, 300, 'ease-out');
+                $.ajax({
+                  type: 'GET', 
+                  url: "http://190.215.44.18/FutbolService/FutbolService.svc/envivojson/"+tournamentId, 
+                  dataType: "json", 
+                  success: function(data){
+                    console.log(data);
+                    r.setData(data);
+                    r.setUIData();
+                  }
+                });
+                $('.btn-volver').on('focus', function(){
+                  $('.btn-volver').on('keydown', function(e){
+                    selectAction('index.html');
+                  });
+                });
+                $(".titulo-categoria").on('focus', function(e){
+                  r.refreshArrows();
+                  $(".box-contenedor .box-nom-categoria .titulo-categoria").on('keydown', function(e){
+                      r.changeCategory();
+                  });
+                });
+                $(".titulo-categoria").on('blur', function(e){
+                    $(".back").animate({ opacity: 0 }, 300 , 'ease-out');
+                    $(".next").animate({ opacity: 0 }, 300, 'ease-out');
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+        <div class="box-contenedor">
+          <div class="logo-camp">
+              <img src="images/logo-camp.png" border="0" width="350" height="95" />
+            </div>
+            <div class="back"><img src="images/btn-back.png" /></div>
+            <div class="box-nom-categoria">
+              <button class="titulo-categoria" id="title">Cargando...</button>
+            </div>
+            <div class="next"><img src="images/btn-next.png" /></div>
+            
+            <div class="clear"></div>
+            <div class="lastMatch">
+              <div class="box-versus">
+                <div id="home" class="equipo1"></div>
+                  <div id="visit" class="equipo2"></div>
+              </div>
+              
+              <div class="clear"></div>
+              
+              <img class="banderas-equipo" src="" id="flagHome" border="0">
+              <img class="banderas-equipo" src="" id="flagVisit" border="0">
+              
+              <div class="clear"></div>
+              
+              <div class="box-estadisticas">
+                <div id="Ghome" class="dato-numeroleft">0</div>
+                  <div class="dato-estadistica">Goles</div>
+                  <div id="Gvisit" class="dato-numeroright">0</div>
+              </div>
+              <div class="box-estadisticas">
+                <div id="OShome" class="dato-numeroleft">0</div>
+                  <div class="dato-estadistica">Fuera de lugar</div>
+                  <div id="OSvisit" class="dato-numeroright">0</div>
+              </div>
+              <div class="box-estadisticas">
+                <div id="OPhome" class="dato-numeroleft">0</div>
+                  <div class="dato-estadistica">Llegadas</div>
+                  <div id="OPvisit" class="dato-numeroright">0</div>
+              </div>
+              <div class="box-estadisticas">
+                <div id="Chome" class="dato-numeroleft">0</div>
+                  <div class="dato-estadistica">Tiros de esquina</div>
+                  <div id="Cvisit" class="dato-numeroright">0</div>
+              </div>
+              <div class="box-estadisticas">
+                <div id="Fhome" class="dato-numeroleft">0</div>
+                  <div class="dato-estadistica">Faltas</div>
+                  <div id="Fvisit" class="dato-numeroright">0</div>
+              </div>
+              <div class="box-estadisticas">
+                <div id="Yhome" class="dato-numeroleft">0</div>
+                  <div class="dato-estadistica">Tarjetas amarillas</div>
+                  <div id="Yvisit" class="dato-numeroright">0</div>
+              </div>
+              <div class="box-estadisticas">
+                <div id="Rhome" class="dato-numeroleft">0</div>
+                  <div class="dato-estadistica">Tarjetas rojas</div>
+                  <div id="Rvisit" class="dato-numeroright">0</div>
+              </div>
+            </div>
+            <div class="homePanel"></div>
+            <div class="visitPanel"></div>
+            <button class="btn-cerrar">Cerrar</button>
+            <button class="btn-volver">Volver</button>
+
+        </div>
+    </body>
+</html>

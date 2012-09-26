@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Incidencias</title>
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<script type="text/javascript" src="js/zepto.js"></script>
+<script type="text/javascript">
+        function selectAction(dir){
+            var KeyID = event.keyCode;
+            if(KeyID==13)
+            {
+                window.location = dir;
+            }
+        }
+        function Incidence(equipo, id, img, jugador, minuto, mitad, segundo)
+        {
+            this.equipo = equipo;
+            this.id = id;
+            this.img = img;
+            this.jugador = jugador;
+            this.minuto = minuto;
+            this.mitad = mitad;
+            this.segundo = segundo;
+        }
+        function Incidencias()
+        {
+          this.pdata;
+          this.setData = function(data){
+            this.pdata = JSON.parse(data.JSONIncidenciasResult);
+            console.log(this.getData().incidences);
+          }
+          this.getData = function(){
+            return this.pdata;
+          }
+          this.setUIData = function(){
+            var incidences = new Array(new Array(), new Array());
+            var teamIndex = 0;
+            $('.box-contenedor .box-versus .equipo1').text(this.getData().local.nombre);
+            $('.box-contenedor .box-versus .equipo2').text(this.getData().visita.nombre);
+            $('.box-contenedor .banderas-equipo#local').attr('src', this.getData().local.img);
+            $('.box-contenedor .banderas-equipo#visita').attr('src', this.getData().visita.img);
+            $('.box-contenedor .icon-info#date img').attr('src', this.getData().fecha.img);
+            $('.box-contenedor .title-info#date').text(this.getData().fecha.data);
+            $('.box-contenedor .icon-info#referee img').attr('src', this.getData().arbitro.img);
+            $('.box-contenedor .title-info#referee').text(this.getData().arbitro.nombre);
+            $('.box-contenedor .icon-info#place img').attr('src', this.getData().estadio.img);
+            $('.box-contenedor .title-info#place').text(this.getData().estadio.nombre);
+            $.each(this.getData().incidences, function(k,v){
+                if(v.equipo=='local')
+                    teamIndex = 0;
+                else
+                    teamIndex = 1;
+                if(v.id==7)
+                {
+                    ins1 = new Incidence(v.equipo, v.id, v.imgIn, v.entra, v.minuto, v.mitad, v.segundo);
+                    ins2 = new Incidence(v.equipo, v.id, v.imgOut, v.sale, v.minuto, v.mitad, v.segundo);
+                    incidences[teamIndex].push(ins1);
+                    incidences[teamIndex].push(ins2);
+                }
+                else
+                    incidences[teamIndex].push(v);
+            });
+            var teamWMoreIncidencesLength = 0;
+            if(incidences[0].length>=incidences[1].length)
+                teamWMoreIncidencesLength = incidences[0].length;
+            else
+                teamWMoreIncidencesLength = incidences[1].length;
+            for(var i=0;i<teamWMoreIncidencesLength;i++)
+            {
+                $('.scrollins').append('<button class="box-incidencia" id="'+i+'"></button>');
+                if(incidences[0][i]!=undefined)
+                {
+
+                    $('#'+i).append('<div class="equipo-1">\
+                        <div class="icon"><img src="'+incidences[0][i].img+'" /></div>\
+                        <div class="name"> '+incidences[0][i].minuto+'\' '+incidences[0][i].jugador+'</div>\
+                        </div>');
+                }
+                else
+                {
+                    $('#'+i).append('<div class="equipo-1"></div>');
+                }
+                if(incidences[1][i]!=undefined)
+                {
+                    $('#'+i).append('<div class="equipo-2">\
+                        <div class="icon"><img src="'+incidences[1][i].img+'" /></div>\
+                        <div class="name"> '+incidences[1][i].minuto+'\' '+incidences[1][i].jugador+'</div>\
+                        </div>');
+                }
+                else
+                {
+                    $('#'+i).append('<div class="equipo-2"></div>');
+                }
+            }
+            console.log(incidences);
+            }
+        }
+    $(document).ready(function(){
+
+        // Begin receiving parameters
+        var queryString = window.location.search || '';
+        var keyValPairs = [];
+        var params      = {};
+        queryString     = queryString.substr(1);
+
+        if (queryString.length)
+        {
+           keyValPairs = queryString.split('&');
+           for (pairNum in keyValPairs)
+           {
+              var key = keyValPairs[pairNum].split('=')[0];
+              if (!key.length) continue;
+              if (typeof params[key] === 'undefined')
+                 params[key] = [];
+              params[key].push(keyValPairs[pairNum].split('=')[1]);
+           }
+        }
+        matchId = params['matchId'];
+        // End doing this shit
+
+        $(".back").animate({ opacity: 0 }, 0 , 'ease-out');
+        $(".next").animate({ opacity: 0 }, 0, 'ease-out');
+
+        var i = new Incidencias();
+        $.ajax({
+          type: 'GET', 
+          url: "http://190.215.44.18/FutbolService/FutbolService.svc/incidenciasjson/"+matchId, 
+          dataType: "json", 
+          success: function(data){
+            //console.log(data.JSONIncidenciasResult);
+            i.setData(data);
+            i.setUIData();
+            console.log(i);
+        }});
+        
+        });
+</script>
+</head>
+
+<body>
+<div class="box-contenedor">
+	<div class="logo-camp">
+    	<img src="images/logo-camp.png" border="0" width="350" height="95" />
+    </div>
+    <div class="back"><img src="images/btn-back.png" /></div>
+    <div class="box-nom-categoria">
+    	<div class="titulo-categoria">Incidencias</div>
+    </div>
+    <div class="next"><img src="images/btn-next.png" /></div>
+    
+    <div class="clear"></div>
+    
+    <div class="box-versus">
+    	<div class="equipo1"></div>
+        <div class="equipo2"></div>
+    </div>
+    
+    <div class="clear"></div>
+    
+    <img class="banderas-equipo" src="" id="local" />
+    <img class="banderas-equipo" src="" id="visita" />
+    
+    <div class="clear"></div>
+    
+    <div class="icon-info" id="date"><img src="" /></div>
+    <div class="title-info" id="date">Fecha del partido</div>
+    <div class="icon-info" id="referee"><img src="images/icon-arbitro.png" /></div>
+    <div class="title-info" id="referee">Arbitro</div>
+    <div class="icon-info" id="place"><img src="images/icon-lugar.png" /></div>
+    <div class="title-info" id="place">Lugar del partido</div>
+    
+    <div class="clear"></div>
+    
+    <div class="titulo-resumen">Resumen del partido</div>
+    
+    <div class="scrollins">
+    </div>
+
+</div>
+</body>
+</html>

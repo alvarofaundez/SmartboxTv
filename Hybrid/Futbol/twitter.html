@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Twitter</title>
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<script type="text/javascript" src="js/zepto.js"></script>
+<script type="text/javascript">
+        function selectAction(dir){
+            var KeyID = event.keyCode;
+            if(KeyID==13)
+            {
+                window.location = dir;
+            }
+        }
+
+$(document).ready(function(){
+
+    function monthConv(monthtxt)
+    {
+        month = 0;
+        switch(monthtxt)
+        {
+            case 'Jan':
+                month = "01";
+                break;
+            case 'Feb':
+                month = "02";
+                break;
+            case 'Mar':
+                month = "03";
+                break;
+            case 'Apr':
+                month = "04";
+                break;
+            case 'May':
+                month = "05";
+                break;
+            case 'Jun':
+                month = "06";
+                break;
+            case 'Jul':
+                month = "07";
+                break;
+            case 'Aug':
+                month = "08";
+                break;
+            case 'Sep':
+                month = "09";
+                break;
+            case 'Oct':
+                month = "10";
+                break;
+            case 'Nov':
+                month = "11";
+                break;
+            case 'Dec':
+                month = "12";
+                break;
+        }
+        return month;
+    }
+
+    function timeAgo(datetime)
+    {
+        var created_at = new Date(datetime);
+        var now = new Date();
+        console.log(created_at);
+        console.log(now);
+        var diff = Math.abs(now-created_at);
+        console.log(diff);
+        diff = Math.round(diff/1000);//segundos
+        console.log(diff);
+        if(diff<60)
+        {
+            if(diff==1)
+                return "hace "+diff+" segundo";
+            else
+                return "hace "+diff+" segundos";
+        }
+        else
+        {
+            diff = Math.round(diff/60);//minutos
+            console.log(diff);
+            if(diff<60)
+            {
+                if(diff==1)
+                    return "hace "+diff+" minuto";
+                else
+                    return "hace "+diff+" minutos";
+            }
+            else
+            {
+                diff = Math.round(diff/60);//horas
+                console.log(diff);
+                if(diff<60)
+                {
+                    if(diff==1)
+                        return "hace "+diff+" hora";
+                    else
+                        return "hace "+diff+" horas";
+                }
+                else
+                {
+                    diff = Math.round(diff/24);//dias
+                    console.log(diff);
+                    if(diff==1)
+                        return "hace "+diff+" día";
+                    else
+                        return "hace "+diff+" días";
+                }
+            }
+        }
+
+    }
+
+    $.ajax({
+        type: "GET",
+        url: 'http://search.twitter.com/search.json?q='+encodeURIComponent('brasil2014 OR #laroja OR #vamoschile OR #eliminatorias OR #mundialbrasil2014 OR #mundial2014&rpp=200&include_entities=true&result_type=mixed'),
+        dataType: "jsonp",
+        success:function( json ) {
+            $.each(json.results,function(i,tweet){
+                $(".tweets").append('<button class="box-tweet"><div class="pic-user"><img src="'+tweet.profile_image_url+'" height="36" width="36" /></div> <div class="user">'+tweet.from_user+':</div><div class="clear"></div><div class="text">'+tweet.text+'</div><div class="hora">'+timeAgo(tweet.created_at)+'</div></button>');
+            });
+        }
+    });
+
+    $('.btn-volver').on('focus', function(){
+      $('.btn-volver').on('keydown', function(e){
+        selectAction('index.html');
+      });
+    });
+});
+</script>
+</head>
+
+<body>
+<div class="box-contenedor">
+	<div class="logo-camp">
+    	<img src="images/logo-camp.png" border="0" width="350" height="95" />
+    </div>
+    <div class="back"><img src="images/btn-back.png" /></div>
+    <div class="box-nom-categoria">
+    	<div class="titulo-categoria">Twitter</div>
+    </div>
+    <div class="next"><img src="images/btn-next.png" /></div>
+    
+    <div class="clear"></div>
+    
+    <div class="tweets"></div>
+    <button class="btn-cerrar">Cerrar</button>
+    <button class="btn-volver">Volver</button>
+    
+    
+    
+    
+</div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+body { background-color:#206c90; margin:0px; font-family:Arial, Helvetica, sans-serif; }
+.box-contenedor { width:350px; height:645px; position:absolute; margin-left:40px; margin-top:40px; background-color:#074963; }
+.box-contenedor .logo-camp { width:350px; height:95px; background-color:#fff; position:relative;}
+.box-contenedor .box-nom-categoria { width:250px; height:50px; margin:0 auto; margin-top:10px; float:left; position:relative; background-image:url(../images/bg-categoria.png); }
+.box-contenedor .box-nom-categoria .titulo-categoria { width:220px; height:35px; margin:0 auto; margin-top:12px; font-size:20px; font-weight:bold; color:#074963; text-align:center; }
+.box-contenedor .back { width:40px; height:50px; margin-left:10px; margin-top:10px; float:left; position:relative; }
+.box-contenedor .next { width:40px; height:50px; margin-right:10px; margin-top:10px; float:left; position:relative; }
+.box-contenedor .box-versus { width:350px; height:55px; margin-top:5px; position:relative; background-image:url(../images/bg-versus.png); }
+.box-contenedor .box-versus .equipo1 { width:140px; height:30px; margin-left:15px; margin-right:20px; margin-top:19px; position:relative; float:left; text-align:center; color:#fff; font-size:16px; font-weight:bold; }
+.box-contenedor .box-versus .equipo2 { width:140px; height:30px; margin-right:15px; margin-left:20px; margin-top:19px; position:relative; float:left; text-align:center; color:#fff; font-size:16px; font-weight:bold; }
+.box-contenedor .banderas-equipo { width:90px; height:55px; position:relative; margin:0px 42px 15px 42px; background-color:#FFF; float:left; }
+.box-contenedor .box-estadisticas { width:340px; height:40px; background-color:#2b6c88; margin:3px 5px 3px 5px; }
+.box-contenedor .box-estadisticas .dato-numeroleft { width:30px; height:20px; padding:10px; margin-left:30px; float:left; text-align:center; color:#fff; font-size:20px; font-weight:bold; }
+.box-contenedor .box-estadisticas .dato-numeroright { width:30px; height:20px; padding:10px; margin-right:30px; float:left; text-align:center; color:#fff; font-size:20px; font-weight:bold; }
+.box-contenedor .box-estadisticas .dato-estadistica { width:180px; padding:10px 0px 10px 0px; height:20px; float:left; text-align:center; color:#fff; font-size:16px; font-weight:bold; }
+.box-contenedor .btn-volver { width:100px; height:17px; padding:10px; margin:10px 5px 15px 5px; background-color:#0f3343; text-align:center; color:#fff; font-size:14px; font-weight:bold; float:right; }
+.box-contenedor .btn-cerrar { width:100px; height:17px; padding:10px; margin:10px 5px 15px 5px; background-color:#0f3343; text-align:center; color:#fff; font-size:14px; font-weight:bold; float:right;}
+.box-contenedor .btn-cerrar:hover { height:11px; width:94px; padding:8px 10px 12px 10px; background-color:#1E6793; border:3px solid #fff; }
+.box-contenedor .btn-volver:hover { height:11px; width:94px; padding:8px 10px 12px 10px; background-color:#1E6793; border:3px solid #fff; }
+.clear { clear:both; }

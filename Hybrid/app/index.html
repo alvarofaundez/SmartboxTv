@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>-->
+		<script type="text/javascript" src="js/zepto.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$.ajax({
+					type: "GET",
+					url: "http://192.168.56.1:8082/gnius/TC",
+					dataType: "jsonp",
+					success:function( json ) {
+					$.each(json.response,function(i,channel){
+					   $("div").append('<article class="tweet"><img src="'+channel.channelImage+'" /> <strong>'+channel.channelNumber+':</strong> '+channel.channelName+'</article>');
+					});
+				}
+			});
+				/*$.getJSON("http://search.twitter.com/search.json?q=blue%20angels&rpp=5&include_entities=true&result_type=mixed",function(json){
+					$.each(json.results,function(i,tweet){
+					   $("div").append('<article class="tweet"><img src="'+tweet.profile_image_url+'" /> <strong>'+tweet.from_user+':</strong> '+tweet.text+' '+tweet.created_at+'</article>');
+					});
+				});
+				$.getJSON("http://192.168.56.1:8082/gnius/TC", function(json) {
+					$.each(json.response,function(i,channel){
+			    		console.log("JSON Data: " + channel.channelName);
+			    	});
+			    });*/
+				/*$.getJSON('http://search.twitter.com/search.json?q=blue%20angels&rpp=5&include_entities=true&result_type=mixed', function(data){
+					console.log(data);
+				});
+				$.ajax({
+				  type: 'GET',
+				  url: 'http://search.twitter.com/search.json?q=blue%20angels&rpp=5&include_entities=true&result_type=mixed',
+				  //data: { i: index },
+				  dataType: 'json',
+				  //timeout: 300,
+				  context: $('div'),
+				  success: function(data){
+				    // Supposing this JSON payload was received:
+				    //   {"project": {"id": 42, "html": "<div>..." }}
+				    // append the HTML to context object.
+				    this.append(data)
+				    //alert(data);
+				  },
+				  error: function(xhr, type){
+				    alert('Ajax error!')
+				  }
+				});*/
+				$("div").css({backgroundColor: '#CCC', fontSize: 28});
+				//$("div").html("Go!");
+				//allacs(0, 100);
+				$("div").animate({
+					left: '50px', rotateZ: '90deg', color: '#abcdef'
+				}, 15000, 'ease-out');
+			});
+
+			function allacs(from, to)
+			{
+				for (var i = from; i <= to; i++) {
+					setTimeout(allacsCall(i),1000);
+				}
+			}
+
+			function allacsCall(index)
+			{
+				$.ajax({
+				  type: 'POST',
+				  url: 'php.php',
+				  data: { i: index },
+				  //dataType: 'json',
+				  //timeout: 300,
+				  context: $('body'),
+				  success: function(data){
+				    // Supposing this JSON payload was received:
+				    //   {"project": {"id": 42, "html": "<div>..." }}
+				    // append the HTML to context object.
+				    this.append(data)
+				    //alert(data);
+				  },
+				  error: function(xhr, type){
+				    alert('Ajax error!')
+				  }
+				});
+			}
+		</script>
+	</head>
+	<body>
+		<div></div>
+	</body>
+</html>

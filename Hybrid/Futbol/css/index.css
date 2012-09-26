@@ -1,0 +1,102 @@
+body { background-color:#206c90; margin:0px; font-family:Arial, Helvetica, sans-serif; }
+.box-contenedor { width:350px; height:645px; position:absolute; margin-left:40px; margin-top:40px; background-color:#074963; }
+.box-contenedor .logo-camp { width:350px; height:95px; background-color:#fff; position:relative;}
+.box-contenedor .box-nom-categoria { width:250px; height:50px; margin:0 auto; margin-top:10px; float:left; position:relative; background-image:url(../images/bg-categoria.png); }
+.box-contenedor .box-nom-categoria .titulo-categoria { width:248px; height:35px; margin:0 auto; margin-top:7px; font-size:20px; outline: none; font-weight:bold; color:#074963; text-align:center; background: none; border: none; }
+.box-contenedor .back { width:40px; height:50px; margin-left:10px; margin-top:10px; float:left; position:relative; }
+.box-contenedor .next { width:40px; height:50px; margin-right:10px; margin-top:10px; float:left; position:relative; }
+.box-contenedor .lastMatch .box-versus { width:350px; height:55px; margin-top:5px; position:relative; background-image:url(../images/bg-versus.png); }
+.box-contenedor .lastMatch .box-versus .equipo1 { width:140px; height:30px; margin-left:15px; margin-right:20px; margin-top:19px; position:relative; float:left; text-align:center; color:#fff; font-size:16px; font-weight:bold; }
+.box-contenedor .lastMatch .box-versus .equipo2 { width:140px; height:30px; margin-right:15px; margin-left:20px; margin-top:19px; position:relative; float:left; text-align:center; color:#fff; font-size:16px; font-weight:bold; }
+.box-contenedor .lastMatch .banderas-equipo { width:90px; height:55px; position:relative; margin:0px 42px 15px 42px; float:left; border: none;}
+.box-contenedor .lastMatch .box-estadisticas { width:340px; height:40px; background-color:#2b6c88; margin:3px 5px 3px 5px; }
+.box-contenedor .lastMatch .box-estadisticas .dato-numeroleft { width:30px; height:20px; padding:10px; margin-left:30px; float:left; text-align:center; color:#fff; font-size:20px; font-weight:bold; }
+.box-contenedor .lastMatch .box-estadisticas .dato-numeroright { width:30px; height:20px; padding:10px; margin-right:30px; float:left; text-align:center; color:#fff; font-size:20px; font-weight:bold; }
+.box-contenedor .lastMatch .box-estadisticas .dato-estadistica { width:180px; padding:10px 0px 10px 0px; height:20px; float:left; text-align:center; color:#fff; font-size:16px; font-weight:bold; }
+.box-contenedor .homePanel { background: #ccc; height: 426px; width: 350px; position:relative; }
+.box-contenedor .visitPanel { background: #764; height: 426px; width: 350px; position:relative; }
+.box-contenedor .btn-volver { width:100px; height:30px !important; border:3px solid #0f3343; padding:5px; margin:10px 5px 15px 5px; background-color:#0f3343; text-align:center; color:#fff; font-size:14px; font-weight:bold; float:right; }
+.box-contenedor .btn-cerrar { width:100px; height:30px !important; border:3px solid #0f3343; padding:5px; margin:10px 5px 15px 5px; background-color:#0f3343; text-align:center; color:#fff; font-size:14px; font-weight:bold; float:right;}
+.box-contenedor .btn-cerrar:focus {  width:100px;  background-color:#1E6793; border:3px solid #fff; outline: none; }
+.box-contenedor .btn-volver:focus {  width:100px;  background-color:#1E6793; border:3px solid #fff; outline: none; }
+.clear { clear:both; }
+
+/*tabla posiciones*/
+.box-contenedor .box-subtitulo { width:350px; height:55px; margin-top:5px; position:relative; background-image:url(images/bg-subtitulo.png); }
+.box-contenedor .box-subtitulo .subtitulo { width:300px; margin:0 auto; text-align:center; padding-top:17px; color:#fff; font-size:18px; font-weight:bold; }
+.box-contenedor .title-nombre-equipos { width:110px; height:20px; margin:15px 5px 5px 15px ; color:#fff; font-size:18px; font-weight:bold; float:left; }
+.box-contenedor .title-ptj { width:34px; height:20px;  color:#fff; font-size:16px; margin-top:10px; font-weight:bold; float:left; padding-top:7px; text-align:center; }
+.box-contenedor .box-equipo { width:320px; height:40px; margin:2px 2px 2px 16px ; color:#fff; float:left; background-color:#206C90; padding: 0px; border:none;   /*opacity:0.2;*/ }
+.box-contenedor .box-equipo:focus { border:2px solid #fff;  margin:0px 0px 0px 16px ; padding: 0px; outline: none; } 
+.box-contenedor .box-equipo-b { width:320px; height:40px; margin:3px 5px 0px 15px ; color:#fff; float:left; background-color:#000; opacity:0.2; }
+.box-contenedor .box-equipo .bandera{ width:110px; height:30px; margin:5px 4px; float:left;  }
+.box-contenedor .box-equipo .bandera img { float: left; width: 37px; height: 25px; }
+.box-contenedor .box-equipo .bandera .nombre { font-size: 13px; font-weight: bold; float: left; padding-top: 8px; padding-left: 3px; }
+.box-contenedor .box-equipo .numero-ptj-a{ width:33px; height:30px; padding-top:10px; color:#fff; font-size:16px; font-weight:bold; float:left; text-align:center; background-color:rgba(8, 72, 104, 0.6); }
+.box-contenedor .box-equipo .numero-ptj-b{ width:33px; height:30px; padding-top:10px; color:#fff; font-size:16px; font-weight:bold; float:left; text-align:center; }
+.box-contenedor .box-equipo .id{ display: none; }
+
+/*Resumen*/
+.box-contenedor .scroll { overflow:hidden; position:relative; height: 430px; }
+.box-contenedor .scroll .box-equipos { width:324px; height:90px; margin:0 auto; position:relative; margin:10px; background-image:url(../images/bg-versus-resumen.png); background-color: transparent; background-position:top; background-repeat:no-repeat; border:3px solid #074963; }
+.box-contenedor .scroll .box-equipos:focus {border:3px solid #fff;}
+.box-contenedor .scroll .box-equipos .nombre-equipo-resumen-l { position:absolute; width:150px; height:15px; text-align:center; top:17px; font-size:14px; font-weight:bold; color:#FFF;}
+.box-contenedor .scroll .box-equipos .nombre-equipo-resumen-r { position:absolute; width:150px; height:15px; text-align:center; top:17px; left:180px; font-size:14px; font-weight:bold; color:#FFF;}
+.box-contenedor .scroll .box-equipos .bandera-l{ left:36px; top:43px; position:absolute; }
+.box-contenedor .scroll .box-equipos .bandera-l img { width:60px; height:40px; }
+.box-contenedor .scroll .box-equipos .bandera-r{ left:236px; top:43px; position:absolute; }
+.box-contenedor .scroll .box-equipos .bandera-r img { width:60px; height:40px; }
+.box-contenedor .scroll .box-equipos .contador-l {  width:20px; height:35px; left:115px; top:45px; position:absolute; font-size:30px; color:#FFF; font-weight:bold;}
+.box-contenedor .scroll .box-equipos .contador-r {  width:20px; height:35px; left:197px; top:45px; position:absolute; font-size:30px; color:#FFF; font-weight:bold;}
+.box-contenedor .scroll .box-equipos .id{ display: none; }
+
+/* Goleadores */
+.box-contenedor .scroll .box-gol { width:330px; height:130px; margin:5px 10px 0px 10px; border:3px solid #074963; background-color:#236081; text-align: left; padding:0px;  }
+.box-contenedor .scroll .box-gol:focus { border:3px solid #fff; background-color:#236081; }
+.box-contenedor .scroll .box-gol .camiseta { width:110px; height:120px; margin:5px; background-color:#FFF; float:left; text-align: center;}
+.box-contenedor .scroll .box-gol .equipo { width:200px; height:20px; margin-top:20px; text-align:right; color:#fff; font-size:14px; font-weight:bold; float:left;}
+.box-contenedor .scroll .box-gol .nombre-gol { width:200px; height:30px; text-align:right; color:#fff; font-size:22px; font-weight:bold; float:left;}
+.box-contenedor .scroll .box-gol .numero-gol { width:200px; height:20px; text-align:right; color:#fff; font-size:24px; font-weight:bold; float:left;}
+
+/* Incidencias */
+.box-contenedor .box-versus { width:350px; height:55px; margin-top:5px; position:relative; background-image:url(../images/bg-versus.png); }
+.box-contenedor .box-versus .equipo1 { width:140px; height:30px; margin-left:15px; margin-right:20px; margin-top:19px; position:relative; float:left; text-align:center; color:#fff; font-size:16px; font-weight:bold; }
+.box-contenedor .box-versus .equipo2 { width:140px; height:30px; margin-right:15px; margin-left:20px; margin-top:19px; position:relative; float:left; text-align:center; color:#fff; font-size:16px; font-weight:bold; }
+.box-contenedor .banderas-equipo { width:90px; height:55px; position:relative; margin:0px 42px 10px 42px; background-color:#FFF; float:left; }
+.box-contenedor .icon-info { width:22px; height:22px; float:left; margin:2px 5px 2px 15px; }
+.box-contenedor .title-info { width:290px; height:18px; padding-top:4px; float:left; margin:2px 5px 2px 2px; font-size:12px; color:#FFF; font-weight:bold; }
+.box-contenedor .titulo-resumen { height:25px; margin-top:10px; position:relative; width:350px; text-align:center; font-size:18px; color:#FFF; font-weight:bold; }
+.box-contenedor .scrollins { overflow:hidden; position:relative; height: 200px; }
+.box-contenedor .scrollins .box-incidencia { width:335px; height:25px; margin:2px 9px 2px 9px; border:2px solid #236081; text-align: left; padding:0px; border:none; background: none; }
+.box-contenedor .scrollins .box-incidencia:focus { border:2px solid #fff; }
+.box-contenedor .scrollins .box-incidencia .equipo-1 { width:162px; height:25px; background-color:#236081; float:left;}
+.box-contenedor .scrollins .box-incidencia .equipo-1 .icon { width:25px; height:25px;  float:left; }
+.box-contenedor .scrollins .box-incidencia .equipo-1 .name { width:130px; padding-top:5px; float:left; color:#FFF; font-size:11px; }
+.box-contenedor .scrollins .box-incidencia .equipo-2 { width:162px; margin-left:6px; height:25px; background-color:#236081; float:left;}
+.box-contenedor .scrollins .box-incidencia .equipo-2 .icon { width:25px; height:25px; float:left; }
+.box-contenedor .scrollins .box-incidencia .equipo-2 .name { width:130px; padding-top:5px; float:left; color:#FFF; font-size:11px; }
+
+/* Twitter */
+.box-contenedor .tweets { overflow:hidden; position:relative; height: 430px; }
+.box-contenedor .tweets .box-tweet { width:330px; height:130px; margin:10px; border:3px solid #074963; background-color: transparent; text-align: left; padding:0px; }
+.box-contenedor .tweets .box-tweet:focus { border:3px solid #fff; }
+.box-contenedor .tweets .box-tweet .pic-user { width:36px; height:36px; margin:5px; background-color:#fff; padding:2px; float:left; }
+.box-contenedor .tweets .box-tweet .user { width:250px; height:25px; margin-top:13px; margin-left:3px; font-size:18px; font-weight:bold; color:#fff; float:left;}
+.box-contenedor .tweets .box-tweet .text { width:320px; height:55px; margin:0px 5px 5px 5px; font-size:11px; color:#FFF; }
+.box-contenedor .tweets .box-tweet .hora { width:320px; height:20px; margin:0px 5px 5px 5px; font-size:11px; color:#F8C107; font-weight:bold; text-align:right; }
+
+/* Formaciones */
+.box-contenedor .cancha { width:170px; height:252px; margin:20px 0px 10px 10px; background-image:url(../images/cancha.png); float:left; }
+.box-contenedor .cancha .loading { font-size: 30px; color: #FFF; }
+.box-contenedor .logo { width:120px; height:90px; float:left; background-color:#fff; margin-left:20px; margin-top:20px; }
+.box-contenedor .dir { width:160px; height:15px; font-size:14px; color:#fff; font-weight:bold; text-align:center; float:left; margin-top:10px }
+.box-contenedor .nombre-dir { width:160px; height:15px; font-size:14px; color:#fff; text-align:center; float:left; }
+.box-contenedor .arquero{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
+.box-contenedor .defensas{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
+.box-contenedor .mediocampo{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
+.box-contenedor .delanteros{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
+.box-contenedor .suplentes{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
+.box-contenedor .marcador { width:34px; float:left; margin:0px; padding: 0px; border: 0px; background: none; }
+.box-contenedor .marcador:focus { opacity:0.5; }
+.box-contenedor .camiseta { width:110px; height:140px; background-color:#FFF; margin-left:20px; float:left; }
+.box-contenedor .datos div { width:200px; height:20px; margin-left:10px; color:#fff; font-size:14px; font-weight:bold; float:left; }
