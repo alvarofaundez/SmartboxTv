@@ -42,6 +42,7 @@ namespace wcfFutbol
             string idMatch=null;
             XmlDocument doc = new XmlDocument();
             JsonStringValue played = null;
+            JsonNumericValue idPartido = null;
             if (!matchPlaying(out idMatch))
             {
                 FutbolInteractivo conn = new FutbolInteractivo("2");
@@ -51,11 +52,13 @@ namespace wcfFutbol
 
                 doc.Load("http://www.datafactory.ws/clientes/xml/index.php?ppaass=updl88updn&canal=deportes.futbol.eliminatorias.ficha." + fixture.IdFixture + "&tipo=3");
                 played = new JsonStringValue("played", "Último partido");
+                idPartido = new JsonNumericValue("idMatch", fixture.IdFixture);
             }
             else
             {
                 doc.Load("http://www.datafactory.ws/clientes/xml/index.php?ppaass=updl88updn&canal=deportes.futbol.eliminatorias.ficha." + idMatch + "&tipo=3");
                 played = new JsonStringValue("played", "En vivo");
+                idPartido = new JsonNumericValue("idMatch", Int64.Parse(idMatch));
             }
             XmlNode incidencias = doc.SelectSingleNode("Match/Incidences");
 
@@ -74,6 +77,7 @@ namespace wcfFutbol
             JsonObjectCollection visitTeam = new JsonObjectCollection("Visit");
 
             jsonFinal.Add(played);
+            jsonFinal.Add(idPartido);
             jsonFinal.Add(localTeam);
             jsonFinal.Add(visitTeam);
 
