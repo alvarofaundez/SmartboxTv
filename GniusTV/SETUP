@@ -1,0 +1,51 @@
+Windows
+
+
+
+Instalar python
+	
+	http://www.python.org/download/
+	
+Add your python 
+	C:\Python27 to the path
+
+Instalar psycopg2
+
+	http://www.stickpeople.com/projects/python/win-psycopg/
+
+Instalar easy_install
+
+	http://pypi.python.org/pypi/setuptools
+
+Instalar pip
+
+	http://pypi.python.org/pypi/pip#downloads
+
+Uncompress
+
+>python setup.py install
+
+Add your python c:\Python27\Scripts to the path
+
+Instalar twython
+
+	>pip install twython
+
+
+Ubuntu
+
+
+
+sudo apt-get install python-setuptools python-pip python-dev build-essential libpq-dev
+
+sudo pip install --upgrade pip 
+
+sudo pip install --upgrade virtualenv 
+
+sudo apt-get install postgresql pgadmin3
+
+pip install simplejson
+
+pip install oauth2
+
+pip install twython
