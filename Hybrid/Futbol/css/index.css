@@ -13,8 +13,8 @@ body { background-color:#206c90; margin:0px; font-family:Arial, Helvetica, sans-
 .box-contenedor .lastMatch .box-estadisticas .dato-numeroleft { width:30px; height:20px; padding:10px; margin-left:30px; float:left; text-align:center; color:#fff; font-size:20px; font-weight:bold; }
 .box-contenedor .lastMatch .box-estadisticas .dato-numeroright { width:30px; height:20px; padding:10px; margin-right:30px; float:left; text-align:center; color:#fff; font-size:20px; font-weight:bold; }
 .box-contenedor .lastMatch .box-estadisticas .dato-estadistica { width:180px; padding:10px 0px 10px 0px; height:20px; float:left; text-align:center; color:#fff; font-size:16px; font-weight:bold; }
-.box-contenedor .homePanel { background: #ccc; height: 426px; width: 350px; position:relative; }
-.box-contenedor .visitPanel { background: #764; height: 426px; width: 350px; position:relative; }
+.box-contenedor .homePanel { background: none; height: 426px; width: 350px; position:relative; }
+.box-contenedor .visitPanel { background: none; height: 426px; width: 350px; position:relative; }
 .box-contenedor .btn-volver { width:100px; height:30px !important; border:3px solid #0f3343; padding:5px; margin:10px 5px 15px 5px; background-color:#0f3343; text-align:center; color:#fff; font-size:14px; font-weight:bold; float:right; }
 .box-contenedor .btn-cerrar { width:100px; height:30px !important; border:3px solid #0f3343; padding:5px; margin:10px 5px 15px 5px; background-color:#0f3343; text-align:center; color:#fff; font-size:14px; font-weight:bold; float:right;}
 .box-contenedor .btn-cerrar:focus {  width:100px;  background-color:#1E6793; border:3px solid #fff; outline: none; }
@@ -86,17 +86,32 @@ body { background-color:#206c90; margin:0px; font-family:Arial, Helvetica, sans-
 .box-contenedor .tweets .box-tweet .hora { width:320px; height:20px; margin:0px 5px 5px 5px; font-size:11px; color:#F8C107; font-weight:bold; text-align:right; }
 
 /* Formaciones */
-.box-contenedor .cancha { width:170px; height:252px; margin:20px 0px 10px 10px; background-image:url(../images/cancha.png); float:left; }
-.box-contenedor .cancha .loading { font-size: 30px; color: #FFF; }
-.box-contenedor .logo { width:120px; height:90px; float:left; background-color:#fff; margin-left:20px; margin-top:20px; }
-.box-contenedor .dir { width:160px; height:15px; font-size:14px; color:#fff; font-weight:bold; text-align:center; float:left; margin-top:10px }
-.box-contenedor .nombre-dir { width:160px; height:15px; font-size:14px; color:#fff; text-align:center; float:left; }
-.box-contenedor .arquero{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
-.box-contenedor .defensas{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
-.box-contenedor .mediocampo{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
-.box-contenedor .delanteros{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
-.box-contenedor .suplentes{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
-.box-contenedor .marcador { width:34px; float:left; margin:0px; padding: 0px; border: 0px; background: none; }
-.box-contenedor .marcador:focus { opacity:0.5; }
-.box-contenedor .camiseta { width:110px; height:140px; background-color:#FFF; margin-left:20px; float:left; }
-.box-contenedor .datos div { width:200px; height:20px; margin-left:10px; color:#fff; font-size:14px; font-weight:bold; float:left; }
+.box-contenedor .homePanel .cancha { width:170px; height:252px; margin:20px 0px 10px 10px; background-image:url(../images/cancha.png); float:left; }
+.box-contenedor .homePanel .cancha .loading { font-size: 30px; color: #FFF; }
+.box-contenedor .homePanel .logo { width:120px; height:90px; float:left; background-color:#fff; margin-left:20px; margin-top:20px; }
+.box-contenedor .homePanel .dir { width:160px; height:15px; font-size:14px; color:#fff; font-weight:bold; text-align:center; float:left; margin-top:10px }
+.box-contenedor .homePanel .nombre-dir { width:160px; height:15px; font-size:14px; color:#fff; text-align:center; float:left; }
+.box-contenedor .homePanel .arquero{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
+.box-contenedor .homePanel .defensas{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
+.box-contenedor .homePanel .mediocampo{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
+.box-contenedor .homePanel .delanteros{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
+.box-contenedor .homePanel .suplentes{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
+.box-contenedor .homePanel .marcador { width:34px; float:left; margin:0px; padding: 0px; border: 0px; background: none; }
+.box-contenedor .homePanel .marcador:focus { opacity:0.5; }
+.box-contenedor .homePanel .camiseta { width:110px; height:140px; background-color:#FFF; margin-left:20px; float:left; }
+.box-contenedor .homePanel .datos div { width:200px; height:20px; margin-left:10px; color:#fff; font-size:14px; font-weight:bold; float:left; }
+
+.box-contenedor .visitPanel .cancha { width:170px; height:252px; margin:20px 0px 10px 10px; background-image:url(../images/cancha.png); float:left; }
+.box-contenedor .visitPanel .cancha .loading { font-size: 30px; color: #FFF; }
+.box-contenedor .visitPanel .logo { width:120px; height:90px; float:left; background-color:#fff; margin-left:20px; margin-top:20px; }
+.box-contenedor .visitPanel .dir { width:160px; height:15px; font-size:14px; color:#fff; font-weight:bold; text-align:center; float:left; margin-top:10px }
+.box-contenedor .visitPanel .nombre-dir { width:160px; height:15px; font-size:14px; color:#fff; text-align:center; float:left; }
+.box-contenedor .visitPanel .arquero{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
+.box-contenedor .visitPanel .defensas{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
+.box-contenedor .visitPanel .mediocampo{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
+.box-contenedor .visitPanel .delanteros{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
+.box-contenedor .visitPanel .suplentes{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
+.box-contenedor .visitPanel .marcador { width:34px; float:left; margin:0px; padding: 0px; border: 0px; background: none; }
+.box-contenedor .visitPanel .marcador:focus { opacity:0.5; }
+.box-contenedor .visitPanel .camiseta { width:110px; height:140px; background-color:#FFF; margin-left:20px; float:left; }
+.box-contenedor .visitPanel .datos div { width:200px; height:20px; margin-left:10px; color:#fff; font-size:14px; font-weight:bold; float:left; }

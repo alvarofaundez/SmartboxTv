@@ -13,6 +13,117 @@
               window.location = dir;
             }
           }
+          function Incidence(equipo, id, img, jugador, minuto, mitad, segundo)
+        {
+            this.equipo = equipo;
+            this.id = id;
+            this.img = img;
+            this.jugador = jugador;
+            this.minuto = minuto;
+            this.mitad = mitad;
+            this.segundo = segundo;
+        }
+        function Formaciones()
+        {
+            this.pdata;
+            this.setData = function(data){
+                this.pdata = JSON.parse(data.JSONFormacionResult);
+                console.log(this.getData());
+            }
+            this.getData = function(){
+                return this.pdata;
+            }
+            this.countJsonElems = function(data){
+                var count = 0;
+                $.each(data, function(k,v){
+                    count++;
+                });
+                return count;
+            }
+            this.setUIData = function(panel){
+                var data = this.getData();
+                $('.'+panel+' .cancha .loading').text('');
+                $('.'+panel+' .cancha .arquero').attr('style', 'width: '+this.countJsonElems(data.arquero)*34+'px;');
+                $('.'+panel+' .cancha .defensas').attr('style', 'width: '+this.countJsonElems(data.defensas)*34+'px;');
+                $('.'+panel+' .cancha .mediocampo').attr('style', 'width: '+this.countJsonElems(data.mediocampo)*34+'px;');
+                $('.'+panel+' .cancha .delanteros').attr('style', 'width: '+this.countJsonElems(data.delanteros)*34+'px;');
+                $('.'+panel+' .cancha .arquero').append('<button class="marcador"> \
+                        <input type="hidden" id="numero" value="'+data.arquero.player_0.numero+'"> \
+                        <input type="hidden" id="nombre" value="'+data.arquero.player_0.nombre+'"> \
+                        <input type="hidden" id="apellido" value="'+data.arquero.player_0.apellido+'"> \
+                        <input type="hidden" id="pais" value="'+data.arquero.player_0.pais+'"> \
+                        <input type="hidden" id="edad" value="'+data.arquero.player_0.edad+'"> \
+                        <input type="hidden" id="peso" value="'+data.arquero.player_0.peso+'"> \
+                        <input type="hidden" id="estatura" value="'+data.arquero.player_0.estatura+'"> \
+                        <img src="images/marcador.png" /> \
+                        </button>');
+                $.each(data.defensas, function(k,v){
+                    $('.'+panel+' .cancha .defensas').append('<button class="marcador"> \
+                        <input type="hidden" id="numero" value="'+v.numero+'"> \
+                        <input type="hidden" id="nombre" value="'+v.nombre+'"> \
+                        <input type="hidden" id="apellido" value="'+v.apellido+'"> \
+                        <input type="hidden" id="pais" value="'+v.pais+'"> \
+                        <input type="hidden" id="edad" value="'+v.edad+'"> \
+                        <input type="hidden" id="peso" value="'+v.peso+'"> \
+                        <input type="hidden" id="estatura" value="'+v.estatura+'"> \
+                        <img src="images/marcador.png" /> \
+                        </button>');
+                });
+                $.each(data.mediocampo, function(k,v){
+                    $('.'+panel+' .cancha .mediocampo').append('<button class="marcador"> \
+                        <input type="hidden" id="numero" value="'+v.numero+'"> \
+                        <input type="hidden" id="nombre" value="'+v.nombre+'"> \
+                        <input type="hidden" id="apellido" value="'+v.apellido+'"> \
+                        <input type="hidden" id="pais" value="'+v.pais+'"> \
+                        <input type="hidden" id="edad" value="'+v.edad+'"> \
+                        <input type="hidden" id="peso" value="'+v.peso+'"> \
+                        <input type="hidden" id="estatura" value="'+v.estatura+'"> \
+                        <img src="images/marcador.png" /> \
+                        </button>');
+                });
+                $.each(data.delanteros, function(k,v){
+                    $('.'+panel+' .cancha .delanteros').append('<button class="marcador"> \
+                        <input type="hidden" id="numero" value="'+v.numero+'"> \
+                        <input type="hidden" id="nombre" value="'+v.nombre+'"> \
+                        <input type="hidden" id="apellido" value="'+v.apellido+'"> \
+                        <input type="hidden" id="pais" value="'+v.pais+'"> \
+                        <input type="hidden" id="edad" value="'+v.edad+'"> \
+                        <input type="hidden" id="peso" value="'+v.peso+'"> \
+                        <input type="hidden" id="estatura" value="'+v.estatura+'"> \
+                        <img src="images/marcador.png" /> \
+                        </button>');
+                });
+                $.each(data.dt, function(k,v){
+                    $('.'+panel+' .cancha #nombre-dir').append(v.nombre+' '+v.apellido);
+                    $('.'+panel+' .cancha #pais-dir').append(v.pais);
+                });
+                var supCounter = 0;
+                $.each(data.suplentes, function(k,v){
+                    if(supCounter<5){
+                        $('.'+panel+' .suplentes').append('<button class="marcador"> \
+                            <input type="hidden" id="numero" value="'+v.numero+'"> \
+                            <input type="hidden" id="nombre" value="'+v.nombre+'"> \
+                            <input type="hidden" id="apellido" value="'+v.apellido+'"> \
+                            <input type="hidden" id="pais" value="'+v.pais+'"> \
+                            <input type="hidden" id="edad" value="'+v.edad+'"> \
+                            <input type="hidden" id="peso" value="'+v.peso+'"> \
+                            <input type="hidden" id="estatura" value="'+v.estatura+'"> \
+                            <img src="images/marcador.png" /> \
+                            </button>');
+                    }
+                    supCounter++;
+                    
+                });
+
+                $('.marcador').on('focus', function(){
+                    $('.datos .numero').text('N° '+$(this).children('#numero').val());
+                    $('.datos .nombre').text('Nombre: '+$(this).children('#nombre').val()+' '+$(this).children('#apellido').val());
+                    $('.datos .pais').text('Pais: '+$(this).children('#pais').val());
+                    $('.datos .edad').text('Edad: '+$(this).children('#edad').val()+' años - Peso: '+$(this).children('#peso').val());
+                    $('.datos .estatura').text('Estatura: '+$(this).children('#estatura').val()+' cm');
+                });
+            }
+        }
         function UltimoPartido()
         {
           this.pdata;
@@ -20,6 +131,7 @@
           this.catIndex=0;
           this.setData = function(data){
             this.pdata = JSON.parse(data.JSONEnVivoResult);
+            console.log();
           }
           this.getData = function(){
             return this.pdata;
@@ -144,6 +256,11 @@
                 var r = new UltimoPartido();
                 $(".back").animate({ opacity: 0 }, 300 , 'ease-out');
                 $(".next").animate({ opacity: 0 }, 300, 'ease-out');
+
+                var matchId = '';
+                var localTeamId = '';
+                var visitTeamId = '';
+
                 $.ajax({
                   type: 'GET', 
                   url: "http://190.215.44.18/FutbolService/FutbolService.svc/envivojson/"+tournamentId, 
@@ -152,8 +269,33 @@
                     console.log(data);
                     r.setData(data);
                     r.setUIData();
+
+                    matchId = r.getData().idMatch;
+                    localTeamId = r.getData().Home.id;
+                    visitTeamId = r.getData().Visit.id;
+                    var f = new Formaciones();
+                    $.ajax({
+                        type: 'GET', 
+                        url: "http://190.215.44.18/FutbolService/FutbolService.svc/formacionjson/"+matchId+','+localTeamId, 
+                        dataType: "json", 
+                        success: function(data){
+                            f.setData(data);
+                            f.setUIData('homePanel');
+                    }});
+                    $.ajax({
+                        type: 'GET', 
+                        url: "http://190.215.44.18/FutbolService/FutbolService.svc/formacionjson/"+matchId+','+visitTeamId, 
+                        dataType: "json", 
+                        success: function(data){
+                            f.setData(data);
+                            f.setUIData('visitPanel');
+                    }});
                   }
                 });
+                // End doing this shit
+
+                
+
                 $('.btn-volver').on('focus', function(){
                   $('.btn-volver').on('keydown', function(e){
                     selectAction('index.html');
@@ -234,8 +376,56 @@
                   <div id="Rvisit" class="dato-numeroright">0</div>
               </div>
             </div>
-            <div class="homePanel"></div>
-            <div class="visitPanel"></div>
+            <div class="homePanel">
+              <div class="cancha">
+                <div class="loading">Cargando ...</div>
+                <div class="arquero"></div>
+                <div class="defensas"></div>
+                <div class="mediocampo"></div>
+                <div class="delanteros"></div>
+              </div>
+              <div class="logo"></div>
+              <div class="dir">Director técnico</div>
+              <div class="nombre-dir" id="nombre-dir"></div>
+              <div class="dir">Nacionalidad</div>
+              <div class="nombre-dir" id="pais-dir"></div>
+              <div class="dir">Suplentes</div>
+              <div class="suplentes"></div>
+              <div class="clear"></div>
+              <div class="camiseta"></div>
+              <div class="datos">
+              <div class="numero"></div>
+              <div class="nombre"></div>
+              <div class="pais"></div>
+              <div class="edad"></div>
+              <div class="estatura"></div>
+              </div>
+            </div>
+            <div class="visitPanel">
+              <div class="cancha">
+                <div class="loading">Cargando ...</div>
+                <div class="arquero"></div>
+                <div class="defensas"></div>
+                <div class="mediocampo"></div>
+                <div class="delanteros"></div>
+              </div>
+              <div class="logo"></div>
+              <div class="dir">Director técnico</div>
+              <div class="nombre-dir" id="nombre-dir"></div>
+              <div class="dir">Nacionalidad</div>
+              <div class="nombre-dir" id="pais-dir"></div>
+              <div class="dir">Suplentes</div>
+              <div class="suplentes"></div>
+              <div class="clear"></div>
+              <div class="camiseta"></div>
+              <div class="datos">
+              <div class="numero"></div>
+              <div class="nombre"></div>
+              <div class="pais"></div>
+              <div class="edad"></div>
+              <div class="estatura"></div>
+              </div>
+            </div>
             <button class="btn-cerrar">Cerrar</button>
             <button class="btn-volver">Volver</button>
 
