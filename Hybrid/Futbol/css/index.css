@@ -88,7 +88,7 @@ body { background-color:#206c90; margin:0px; font-family:Arial, Helvetica, sans-
 /* Formaciones */
 .box-contenedor .homePanel .cancha { width:170px; height:252px; margin:20px 0px 10px 10px; background-image:url(../images/cancha.png); float:left; }
 .box-contenedor .homePanel .cancha .loading { font-size: 30px; color: #FFF; }
-.box-contenedor .homePanel .logo { width:120px; height:90px; float:left; background-color:#fff; margin-left:20px; margin-top:20px; }
+.box-contenedor .homePanel .logo { width:120px; height:90px; float:left; background-color:none; margin-left:20px; margin-top:20px; }
 .box-contenedor .homePanel .dir { width:160px; height:15px; font-size:14px; color:#fff; font-weight:bold; text-align:center; float:left; margin-top:10px }
 .box-contenedor .homePanel .nombre-dir { width:160px; height:15px; font-size:14px; color:#fff; text-align:center; float:left; }
 .box-contenedor .homePanel .arquero{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
@@ -97,13 +97,13 @@ body { background-color:#206c90; margin:0px; font-family:Arial, Helvetica, sans-
 .box-contenedor .homePanel .delanteros{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
 .box-contenedor .homePanel .suplentes{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
 .box-contenedor .homePanel .marcador { width:34px; float:left; margin:0px; padding: 0px; border: 0px; background: none; }
-.box-contenedor .homePanel .marcador:focus { opacity:0.5; }
-.box-contenedor .homePanel .camiseta { width:110px; height:140px; background-color:#FFF; margin-left:20px; float:left; }
+.box-contenedor .homePanel .camiseta { width:110px; height:140px; background-color:none; margin-left:20px; float:left; }
+.box-contenedor .homePanel .datos { height:150px;background-repeat:no-repeat; background-position:right top; margin-top: 15px; }
 .box-contenedor .homePanel .datos div { width:200px; height:20px; margin-left:10px; color:#fff; font-size:14px; font-weight:bold; float:left; }
 
 .box-contenedor .visitPanel .cancha { width:170px; height:252px; margin:20px 0px 10px 10px; background-image:url(../images/cancha.png); float:left; }
 .box-contenedor .visitPanel .cancha .loading { font-size: 30px; color: #FFF; }
-.box-contenedor .visitPanel .logo { width:120px; height:90px; float:left; background-color:#fff; margin-left:20px; margin-top:20px; }
+.box-contenedor .visitPanel .logo { width:120px; height:90px; float:left; background-color:none; margin-left:20px; margin-top:20px; }
 .box-contenedor .visitPanel .dir { width:160px; height:15px; font-size:14px; color:#fff; font-weight:bold; text-align:center; float:left; margin-top:10px }
 .box-contenedor .visitPanel .nombre-dir { width:160px; height:15px; font-size:14px; color:#fff; text-align:center; float:left; }
 .box-contenedor .visitPanel .arquero{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
@@ -112,6 +112,6 @@ body { background-color:#206c90; margin:0px; font-family:Arial, Helvetica, sans-
 .box-contenedor .visitPanel .delanteros{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
 .box-contenedor .visitPanel .suplentes{ height: 34px; text-align: center; margin: 15px auto; padding-left: 10px;}
 .box-contenedor .visitPanel .marcador { width:34px; float:left; margin:0px; padding: 0px; border: 0px; background: none; }
-.box-contenedor .visitPanel .marcador:focus { opacity:0.5; }
-.box-contenedor .visitPanel .camiseta { width:110px; height:140px; background-color:#FFF; margin-left:20px; float:left; }
+.box-contenedor .visitPanel .camiseta { width:110px; height:140px; background-color:none; margin-left:20px; float:left; }
+.box-contenedor .visitPanel .datos { height:150px;background-repeat:no-repeat; background-position:right top; margin-top: 15px; }
 .box-contenedor .visitPanel .datos div { width:200px; height:20px; margin-left:10px; color:#fff; font-size:14px; font-weight:bold; float:left; }

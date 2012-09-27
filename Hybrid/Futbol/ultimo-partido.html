@@ -42,6 +42,9 @@
             }
             this.setUIData = function(panel){
                 var data = this.getData();
+                $('.'+panel+' .logo').attr('src', data.escudo);
+                $('.'+panel+' .camiseta').attr('src', data.camiseta);
+                $('.'+panel+' .datos').attr('style', 'background-image:url('+data.info+');');
                 $('.'+panel+' .cancha .loading').text('');
                 $('.'+panel+' .cancha .arquero').attr('style', 'width: '+this.countJsonElems(data.arquero)*34+'px;');
                 $('.'+panel+' .cancha .defensas').attr('style', 'width: '+this.countJsonElems(data.defensas)*34+'px;');
@@ -50,10 +53,10 @@
                 $('.'+panel+' .cancha .arquero').append('<button class="marcador"> \
                         <input type="hidden" id="numero" value="'+data.arquero.player_0.numero+'"> \
                         <input type="hidden" id="nombre" value="'+data.arquero.player_0.nombre+'"> \
-                        <input type="hidden" id="apellido" value="'+data.arquero.player_0.apellido+'"> \
+                        <input type="hidden" id="apellido" value="'+data.arquero.player_0.apellido.split(' ')[0]+'"> \
                         <input type="hidden" id="pais" value="'+data.arquero.player_0.pais+'"> \
                         <input type="hidden" id="edad" value="'+data.arquero.player_0.edad+'"> \
-                        <input type="hidden" id="peso" value="'+data.arquero.player_0.peso+'"> \
+                        <input type="hidden" id="peso" value="'+data.arquero.player_0.peso+' kg"> \
                         <input type="hidden" id="estatura" value="'+data.arquero.player_0.estatura+'"> \
                         <img src="images/marcador.png" /> \
                         </button>');
@@ -61,10 +64,10 @@
                     $('.'+panel+' .cancha .defensas').append('<button class="marcador"> \
                         <input type="hidden" id="numero" value="'+v.numero+'"> \
                         <input type="hidden" id="nombre" value="'+v.nombre+'"> \
-                        <input type="hidden" id="apellido" value="'+v.apellido+'"> \
+                        <input type="hidden" id="apellido" value="'+v.apellido.split(' ')[0]+'"> \
                         <input type="hidden" id="pais" value="'+v.pais+'"> \
                         <input type="hidden" id="edad" value="'+v.edad+'"> \
-                        <input type="hidden" id="peso" value="'+v.peso+'"> \
+                        <input type="hidden" id="peso" value="'+v.peso+' kg"> \
                         <input type="hidden" id="estatura" value="'+v.estatura+'"> \
                         <img src="images/marcador.png" /> \
                         </button>');
@@ -73,10 +76,10 @@
                     $('.'+panel+' .cancha .mediocampo').append('<button class="marcador"> \
                         <input type="hidden" id="numero" value="'+v.numero+'"> \
                         <input type="hidden" id="nombre" value="'+v.nombre+'"> \
-                        <input type="hidden" id="apellido" value="'+v.apellido+'"> \
+                        <input type="hidden" id="apellido" value="'+v.apellido.split(' ')[0]+'"> \
                         <input type="hidden" id="pais" value="'+v.pais+'"> \
                         <input type="hidden" id="edad" value="'+v.edad+'"> \
-                        <input type="hidden" id="peso" value="'+v.peso+'"> \
+                        <input type="hidden" id="peso" value="'+v.peso+' kg"> \
                         <input type="hidden" id="estatura" value="'+v.estatura+'"> \
                         <img src="images/marcador.png" /> \
                         </button>');
@@ -85,17 +88,17 @@
                     $('.'+panel+' .cancha .delanteros').append('<button class="marcador"> \
                         <input type="hidden" id="numero" value="'+v.numero+'"> \
                         <input type="hidden" id="nombre" value="'+v.nombre+'"> \
-                        <input type="hidden" id="apellido" value="'+v.apellido+'"> \
+                        <input type="hidden" id="apellido" value="'+v.apellido.split(' ')[0]+'"> \
                         <input type="hidden" id="pais" value="'+v.pais+'"> \
                         <input type="hidden" id="edad" value="'+v.edad+'"> \
-                        <input type="hidden" id="peso" value="'+v.peso+'"> \
+                        <input type="hidden" id="peso" value="'+v.peso+' kg"> \
                         <input type="hidden" id="estatura" value="'+v.estatura+'"> \
                         <img src="images/marcador.png" /> \
                         </button>');
                 });
                 $.each(data.dt, function(k,v){
-                    $('.'+panel+' .cancha #nombre-dir').append(v.nombre+' '+v.apellido);
-                    $('.'+panel+' .cancha #pais-dir').append(v.pais);
+                    $('.'+panel+' #nombre-dir').append(v.nombre+' '+v.apellido.split(' ')[0]);
+                    $('.'+panel+' #pais-dir').append(v.pais);
                 });
                 var supCounter = 0;
                 $.each(data.suplentes, function(k,v){
@@ -103,10 +106,10 @@
                         $('.'+panel+' .suplentes').append('<button class="marcador"> \
                             <input type="hidden" id="numero" value="'+v.numero+'"> \
                             <input type="hidden" id="nombre" value="'+v.nombre+'"> \
-                            <input type="hidden" id="apellido" value="'+v.apellido+'"> \
+                            <input type="hidden" id="apellido" value="'+v.apellido.split(' ')[0]+'"> \
                             <input type="hidden" id="pais" value="'+v.pais+'"> \
                             <input type="hidden" id="edad" value="'+v.edad+'"> \
-                            <input type="hidden" id="peso" value="'+v.peso+'"> \
+                            <input type="hidden" id="peso" value="'+v.peso+' kg"> \
                             <input type="hidden" id="estatura" value="'+v.estatura+'"> \
                             <img src="images/marcador.png" /> \
                             </button>');
@@ -116,11 +119,15 @@
                 });
 
                 $('.marcador').on('focus', function(){
+                    $(this).children('img').attr('src', 'http://190.215.44.18/Hibrido/Chile/Futbol/images/marcador_focus.png');
                     $('.datos .numero').text('N° '+$(this).children('#numero').val());
                     $('.datos .nombre').text('Nombre: '+$(this).children('#nombre').val()+' '+$(this).children('#apellido').val());
                     $('.datos .pais').text('Pais: '+$(this).children('#pais').val());
                     $('.datos .edad').text('Edad: '+$(this).children('#edad').val()+' años - Peso: '+$(this).children('#peso').val());
                     $('.datos .estatura').text('Estatura: '+$(this).children('#estatura').val()+' cm');
+                });
+                $('.marcador').on('blur', function(){
+                  $(this).children('img').attr('src', 'http://190.215.44.18/Hibrido/Chile/Futbol/images/marcador.png');
                 });
             }
         }
@@ -384,7 +391,7 @@
                 <div class="mediocampo"></div>
                 <div class="delanteros"></div>
               </div>
-              <div class="logo"></div>
+              <img class="logo" src="">
               <div class="dir">Director técnico</div>
               <div class="nombre-dir" id="nombre-dir"></div>
               <div class="dir">Nacionalidad</div>
@@ -392,13 +399,13 @@
               <div class="dir">Suplentes</div>
               <div class="suplentes"></div>
               <div class="clear"></div>
-              <div class="camiseta"></div>
+              <img class="camiseta" src="">
               <div class="datos">
-              <div class="numero"></div>
-              <div class="nombre"></div>
-              <div class="pais"></div>
-              <div class="edad"></div>
-              <div class="estatura"></div>
+                <div class="numero"></div>
+                <div class="nombre"></div>
+                <div class="pais"></div>
+                <div class="edad"></div>
+                <div class="estatura"></div>
               </div>
             </div>
             <div class="visitPanel">
@@ -409,7 +416,7 @@
                 <div class="mediocampo"></div>
                 <div class="delanteros"></div>
               </div>
-              <div class="logo"></div>
+              <img class="logo" src="">
               <div class="dir">Director técnico</div>
               <div class="nombre-dir" id="nombre-dir"></div>
               <div class="dir">Nacionalidad</div>
@@ -417,13 +424,15 @@
               <div class="dir">Suplentes</div>
               <div class="suplentes"></div>
               <div class="clear"></div>
-              <div class="camiseta"></div>
+              <img class="camiseta" src="">
+              <div class="panel">
               <div class="datos">
-              <div class="numero"></div>
-              <div class="nombre"></div>
-              <div class="pais"></div>
-              <div class="edad"></div>
-              <div class="estatura"></div>
+                <div class="numero"></div>
+                <div class="nombre"></div>
+                <div class="pais"></div>
+                <div class="edad"></div>
+                <div class="estatura"></div>
+              </div>
               </div>
             </div>
             <button class="btn-cerrar">Cerrar</button>
