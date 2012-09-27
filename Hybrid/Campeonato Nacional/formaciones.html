@@ -1,0 +1,195 @@
+<!DOCTYPE html">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Formaciones</title>
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<script type="text/javascript" src="js/zepto.js"></script>
+<script type="text/javascript">
+    function Incidence(equipo, id, img, jugador, minuto, mitad, segundo)
+        {
+            this.equipo = equipo;
+            this.id = id;
+            this.img = img;
+            this.jugador = jugador;
+            this.minuto = minuto;
+            this.mitad = mitad;
+            this.segundo = segundo;
+        }
+        function Formaciones()
+        {
+            this.pdata;
+            this.setData = function(data){
+                this.pdata = JSON.parse(data.JSONFormacionResult);
+                console.log(this.getData());
+            }
+            this.getData = function(){
+                return this.pdata;
+            }
+            this.countJsonElems = function(data){
+                var count = 0;
+                $.each(data, function(k,v){
+                    count++;
+                });
+                return count;
+            }
+            this.setUIData = function(){
+                var data = this.getData();
+                $('.cancha .loading').text('');
+                $('.cancha .arquero').attr('style', 'width: '+this.countJsonElems(data.arquero)*34+'px;');
+                $('.cancha .defensas').attr('style', 'width: '+this.countJsonElems(data.defensas)*34+'px;');
+                $('.cancha .mediocampo').attr('style', 'width: '+this.countJsonElems(data.mediocampo)*34+'px;');
+                $('.cancha .delanteros').attr('style', 'width: '+this.countJsonElems(data.delanteros)*34+'px;');
+                $('.cancha .arquero').append('<button class="marcador"> \
+                        <input type="hidden" id="numero" value="'+data.arquero.player_0.numero+'"> \
+                        <input type="hidden" id="nombre" value="'+data.arquero.player_0.nombre+'"> \
+                        <input type="hidden" id="apellido" value="'+data.arquero.player_0.apellido+'"> \
+                        <input type="hidden" id="pais" value="'+data.arquero.player_0.pais+'"> \
+                        <input type="hidden" id="edad" value="'+data.arquero.player_0.edad+'"> \
+                        <input type="hidden" id="peso" value="'+data.arquero.player_0.peso+'"> \
+                        <input type="hidden" id="estatura" value="'+data.arquero.player_0.estatura+'"> \
+                        <img src="images/marcador.png" /> \
+                        </button>');
+                $.each(data.defensas, function(k,v){
+                    $('.cancha .defensas').append('<button class="marcador"> \
+                        <input type="hidden" id="numero" value="'+v.numero+'"> \
+                        <input type="hidden" id="nombre" value="'+v.nombre+'"> \
+                        <input type="hidden" id="apellido" value="'+v.apellido+'"> \
+                        <input type="hidden" id="pais" value="'+v.pais+'"> \
+                        <input type="hidden" id="edad" value="'+v.edad+'"> \
+                        <input type="hidden" id="peso" value="'+v.peso+'"> \
+                        <input type="hidden" id="estatura" value="'+v.estatura+'"> \
+                        <img src="images/marcador.png" /> \
+                        </button>');
+                });
+                $.each(data.mediocampo, function(k,v){
+                    $('.cancha .mediocampo').append('<button class="marcador"> \
+                        <input type="hidden" id="numero" value="'+v.numero+'"> \
+                        <input type="hidden" id="nombre" value="'+v.nombre+'"> \
+                        <input type="hidden" id="apellido" value="'+v.apellido+'"> \
+                        <input type="hidden" id="pais" value="'+v.pais+'"> \
+                        <input type="hidden" id="edad" value="'+v.edad+'"> \
+                        <input type="hidden" id="peso" value="'+v.peso+'"> \
+                        <input type="hidden" id="estatura" value="'+v.estatura+'"> \
+                        <img src="images/marcador.png" /> \
+                        </button>');
+                });
+                $.each(data.delanteros, function(k,v){
+                    $('.cancha .delanteros').append('<button class="marcador"> \
+                        <input type="hidden" id="numero" value="'+v.numero+'"> \
+                        <input type="hidden" id="nombre" value="'+v.nombre+'"> \
+                        <input type="hidden" id="apellido" value="'+v.apellido+'"> \
+                        <input type="hidden" id="pais" value="'+v.pais+'"> \
+                        <input type="hidden" id="edad" value="'+v.edad+'"> \
+                        <input type="hidden" id="peso" value="'+v.peso+'"> \
+                        <input type="hidden" id="estatura" value="'+v.estatura+'"> \
+                        <img src="images/marcador.png" /> \
+                        </button>');
+                });
+                var supCounter = 0;
+                $.each(data.suplentes, function(k,v){
+                    if(supCounter<5){
+                        $('.suplentes').append('<button class="marcador"> \
+                            <input type="hidden" id="numero" value="'+v.numero+'"> \
+                            <input type="hidden" id="nombre" value="'+v.nombre+'"> \
+                            <input type="hidden" id="apellido" value="'+v.apellido+'"> \
+                            <input type="hidden" id="pais" value="'+v.pais+'"> \
+                            <input type="hidden" id="edad" value="'+v.edad+'"> \
+                            <input type="hidden" id="peso" value="'+v.peso+'"> \
+                            <input type="hidden" id="estatura" value="'+v.estatura+'"> \
+                            <img src="images/marcador.png" /> \
+                            </button>');
+                    }
+                    supCounter++;
+                    
+                });
+
+                $('.marcador').on('focus', function(){
+                    $('.datos .numero').text('N° '+$(this).children('#numero').val());
+                    $('.datos .nombre').text('Nombre: '+$(this).children('#nombre').val()+' '+$(this).children('#apellido').val());
+                    $('.datos .pais').text('Pais: '+$(this).children('#pais').val());
+                    $('.datos .edad').text('Edad: '+$(this).children('#edad').val()+' años - Peso: '+$(this).children('#peso').val());
+                    $('.datos .estatura').text('Estatura: '+$(this).children('#estatura').val()+' cm');
+                });
+            }
+        }
+    $(document).ready(function(){
+
+        // Begin receiving parameters
+        var queryString = window.location.search || '';
+        var keyValPairs = [];
+        var params      = {};
+        queryString     = queryString.substr(1);
+
+        if (queryString.length)
+        {
+           keyValPairs = queryString.split('&');
+           for (pairNum in keyValPairs)
+           {
+              var key = keyValPairs[pairNum].split('=')[0];
+              if (!key.length) continue;
+              if (typeof params[key] === 'undefined')
+                 params[key] = [];
+              params[key].push(keyValPairs[pairNum].split('=')[1]);
+           }
+        }
+        matchId = params['matchId'];
+        teamId = params['teamId'];
+        // End doing this shit
+
+        $(".back").animate({ opacity: 0 }, 0 , 'ease-out');
+        $(".next").animate({ opacity: 0 }, 0, 'ease-out');
+
+        var f = new Formaciones();
+        $.ajax({
+            type: 'GET', 
+            url: "http://190.215.44.18/FutbolService/FutbolService.svc/formacionjson/"+matchId+','+teamId, 
+            dataType: "json", 
+            success: function(data){
+                f.setData(data);
+                f.setUIData();
+        }});
+    });
+</script>
+
+</head>
+
+<body>
+<div class="box-contenedor">
+	<div class="logo-camp">
+    	<img src="images/logo-camp.png" border="0" width="350" height="95" />
+    </div>
+    <div class="back"><img src="images/btn-back.png" /></div>
+    <div class="box-nom-categoria">
+    	<div class="titulo-categoria">Formaciones</div>
+    </div>
+    <div class="next"><img src="images/btn-next.png" /></div>
+    
+    <div class="clear"></div>
+    
+    <div class="cancha">
+        <div class="loading">Cargando ...</div>
+        <div class="arquero"></div>
+        <div class="defensas"></div>
+        <div class="mediocampo"></div>
+        <div class="delanteros"></div>
+    </div>
+    <div class="logo"></div>
+    <div class="dir">Director técnico</div>
+    <div class="nombre-dir">Claudio Borghi</div>
+    <div class="dir">Nacionalidad</div>
+    <div class="nombre-dir">Argentina</div>
+    <div class="dir">Suplentes</div>
+    <div class="suplentes"></div>
+    <div class="clear"></div>
+    <div class="camiseta"></div>
+    <div class="datos">
+        <div class="numero"></div>
+        <div class="nombre"></div>
+        <div class="pais"></div>
+        <div class="edad"></div>
+        <div class="estatura"></div>
+    </div>
+</div>
+</body>
+</html>

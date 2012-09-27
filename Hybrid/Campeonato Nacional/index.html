@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Menu</title>
+<script type="text/javascript" src="js/zepto.js"></script>
+<script type="text/javascript">
+	function selectAction(dir){
+		var KeyID = event.keyCode;
+		if(KeyID==13)
+		{
+			window.location = dir;
+		}
+	}
+
+	$(document).ready(function(){
+		$.ajax({
+              type: 'GET', 
+              url: "http://190.215.44.18/FutbolService/FutbolService.svc/idtournamentjson", 
+              dataType: "json", 
+              success: function(data){
+                console.log(data.JSONIdTournamentResult);
+                tournamentId = data.JSONIdTournamentResult;
+                /*p.setData(data);
+                p.setUIData();*/
+              }
+            });
+		$('.boton1').on('focus', function(){
+			$('.boton1').on('keydown', function(e){
+				if(typeof tournamentId != 'undefined')
+					selectAction('ultimo-partido.html?tournamentId='+tournamentId);
+				else
+					console.log('tournamentId undefined');
+			});
+		});
+		$('.boton2').on('focus', function(){
+			$('.boton2').on('keydown', function(e){
+				if(typeof tournamentId != 'undefined')
+					selectAction('resumen.html?tournamentId='+tournamentId);
+				else
+					console.log('tournamentId undefined');
+			});
+		});
+		$('.boton3').on('focus', function(){
+			$('.boton3').on('keydown', function(e){
+				if(typeof tournamentId != 'undefined')
+					selectAction('tabla-posiciones.html?tournamentId='+tournamentId);
+				else
+					console.log('tournamentId undefined');
+			});
+		});
+		$('.boton4').on('focus', function(){
+			$('.boton4').on('keydown', function(e){
+				if(typeof tournamentId != 'undefined')
+					selectAction('goleadores.html?tournamentId='+tournamentId);
+				else
+					console.log('tournamentId undefined');
+			});
+		});
+		$('.boton5').on('focus', function(){
+			$('.boton5').on('keydown', function(e){
+				selectAction('twitter.html');
+			});
+		});
+	});
+</script>
+<style>
+body { margin:0px; font-family:Arial, Helvetica, sans-serif; }
+.menu { width:1280px; height:200px; background-image:url(images/bg-menu.png); position:absolute; top:520px; }
+.menu .boton1 { width:122px; height:148px; border:none; outline:none; position:relative; left:450px; top:30px; background-image:url(images/Button_Live.png); background-color:transparent; }
+.menu .boton1:focus { background-image:url(images/Button_Live_OnClick.png); background-color:transparent; }
+.menu .boton2 { width:122px; height:148px; border:none; outline:none; position:relative; left:480px; top:30px; background-image:url(images/Buttom_resumen.png); background-color:transparent; }
+.menu .boton2:focus { background-image:url(images/Buttom_resumen_OnClick.png); background-color:transparent; }
+.menu .boton3 { width:122px; height:148px; border:none; outline:none; position:relative; left:510px; top:30px; background-image:url(images/Button_Fixture.png); background-color:transparent; }
+.menu .boton3:focus { background-image:url(images/Button_Fixture_OnClick.png); background-color:transparent; }
+.menu .boton4 { width:122px; height:148px; border:none; outline:none; position:relative; left:540px; top:30px; background-image:url(images/Button_Stars.png); background-color:transparent; }
+.menu .boton4:focus { background-image:url(images/Button_Stars_OnClick.png); background-color:transparent; }
+.menu .boton5 { width:122px; height:148px; border:none; outline:none; position:relative; left:570px; top:30px; background-image:url(images/Button_Twitter.png); background-color:transparent; }
+.menu .boton5:focus { background-image:url(images/Button_Twitter_OnClick.png); background-color:transparent; }
+
+
+</style>
+</head>
+
+<body>
+<div class="menu">
+	<button class="boton1"></button>
+	<button class="boton2"></button>
+	<button class="boton3"></button>
+	<button class="boton4"></button>
+	<button class="boton5"></button>
+
+	<!--<input type="button" class="boton1" />
+    <input type="button" class="boton2" />
+    <input type="button" class="boton3" />
+    <input type="button" class="boton4" />
+    <input type="button" class="boton5" />-->
+</div>
+
+</body>
+</html>
